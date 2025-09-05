@@ -59,6 +59,11 @@ The Gradio interface will have three tabs:
 
 ---
 
+## Future Work
+
+- Right now, the search_tool doesn't fully work as expected since the LLM doesn't know how to parse the results.
+- Need to add some logic and some examples for this
+
 ## Notes
 
 - The agent and MCP tools are defined in `utils/agent.py` and `utils/mcp_server.py`.
