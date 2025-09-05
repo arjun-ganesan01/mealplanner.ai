@@ -14,7 +14,7 @@ def display_plan() -> pd.DataFrame:
     df = pd.read_json('meal_plan.json')
     first_col = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
-    # Insert the new column at the beginning (index -2)
+    # Insert the new column at the beginning 
     df.insert(loc=0, column="Day", value=first_col)
     return df
 

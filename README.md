@@ -44,6 +44,9 @@ export HF_TOKEN=<your HF Token>
 
 ---
 
+Note that if this option is not used, the app downloads the model from the HuggingFace Hub
+to your local machine and runs inference using your local hardware.
+
 ### 4. Run the App
 
 ```sh
