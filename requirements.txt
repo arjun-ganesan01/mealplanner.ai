@@ -1,0 +1,5 @@
+transformers
+mcp[cli]
+smolagents[mcp]
+accelerate # To use smolagents TransformersModel
+ddgs

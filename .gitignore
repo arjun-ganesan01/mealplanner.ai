@@ -1,0 +1,11 @@
+__pycache__/
+.venv/
+.gradio/
+*.pyc
+*.pyo
+*.pyd
+.python-version
+pyproject.toml
+uv.lock
+node_modules/
+package*
