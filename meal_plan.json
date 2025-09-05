@@ -1,20 +1,20 @@
 {
     "Lunch": [
-        "Egg Curry",
-        "Soya chunk thalipeeth",
-        "Arjun's Dal",
         "White Vatana (peas) subzi",
-        "Aglio e olio",
-        "Komron Borta",
-        "Idli chutney"
+        "Harissa Pesto",
+        "Soya spinach capsicum rice",
+        "Arjun's Dal",
+        "Dosa",
+        "Gobi Paratha",
+        "Saag paneer"
     ],
     "Dinner": [
-        "Soya chunk thalipeeth",
+        "Harissa Pesto",
+        "Soya spinach capsicum rice",
         "Arjun's Dal",
-        "White Vatana (peas) subzi",
-        "Aglio e olio",
-        "Komron Borta",
-        "Idli chutney",
-        "Lehsooni Palak"
+        "Dosa",
+        "Gobi Paratha",
+        "Saag paneer",
+        "Rajma"
     ]
 }

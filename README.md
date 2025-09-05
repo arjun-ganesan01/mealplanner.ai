@@ -69,7 +69,3 @@ The Gradio interface will have three tabs:
 ## Contributing
 
 Feel free to open issues or submit pull requests for improvements or bug fixes.
-
-## License
-
-This project is licensed under the MIT
