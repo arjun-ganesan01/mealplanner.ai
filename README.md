@@ -33,18 +33,24 @@ uv pip install -r requirements.txt
 
 ---
 
-### 3. (Optional) Use HuggingFace Inference Infrastructure
+### 3. Select Model backend
 
-To serve the agent using HuggingFace, set the environment variable before running the app:
+The default model is set to `Qwen/Qwen3-30B-A3B-Instruct-2507` and can be customized with `MODEL_ID` environment variable.
+
+To use HuggingFace Inference Infrastructure, set these environment variables before running the app:
 
 ```sh
-export MEALPLANNER_SERVE_WITH_HF=true
-export HF_TOKEN=<your HF Token>
+export MEALPLAN_MODEL_TYPE=InferenceClientModel HUGGINGFACE_API_TOKEN=YOUR_HF_TOKEN
+```
+
+To use a local OpenAI compatible API server, set these environment variables:
+```sh
+export MEALPLAN_MODEL_TYPE=OpenAIServerModel OPENAI_BASE_URL=YOUR_BASE_URL OPENAI_API_KEY=YOUR_API_KEY
 ```
 
 ---
 
-Note that if this option is not used, the app downloads the model from the HuggingFace Hub
+Note that if neither options are not used, the app downloads the model from the HuggingFace Hub
 to your local machine and runs inference using your local hardware.
 
 ### 4. Run the App
