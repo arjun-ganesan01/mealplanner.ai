@@ -1,5 +1,23 @@
 import sqlite3
 
+def initialize_database(db_name: str = 'meals_database.db') -> None:
+    """Initialize the SQLite database and create the meals table if it doesn't exist.
+    Args:
+        db_name (str): The name of the SQLite database file.
+    """
+    with sqlite3.connect(db_name) as conn:
+        cursor = conn.cursor()
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS meals (
+                id INTEGER PRIMARY KEY,
+                meal_name TEXT NOT NULL,
+                grocery_items TEXT,
+                able_to_make_more_for_lunch BOOLEAN,
+                cuisine TEXT
+            )
+        ''')
+        conn.commit()
+
 def execute_query_on_database(sql_query: str, sql_query_args: list, db_name: str = 'meals_database.db') -> list:
     """Connect to the SQLite database and execute a query.
     Args:
@@ -9,6 +27,8 @@ def execute_query_on_database(sql_query: str, sql_query_args: list, db_name: str
     Returns:
         list: The result of the query as a list of tuples.
     """
+
+    initialize_database(db_name)  # Ensure the database and table are initialized
     with sqlite3.connect(db_name) as conn:
         cursor = conn.cursor()
         cursor.execute(sql_query, sql_query_args)
@@ -32,6 +52,8 @@ def get_all_meal_records_from_db(db_name: str = 'meals_database.db') -> list:
         list: A list of meal records, where each record is a tuple containing meal details:
         (id, meal_name, grocery_items, able_to_make_more_for_lunch, cuisine).
     """
+    initialize_database(db_name)  # Ensure the database and table are initialized
+
     # Using a context manager to ensure the connection is closed properly
     with sqlite3.connect(db_name) as conn:
         cursor = conn.cursor()
@@ -48,17 +70,10 @@ def add_meal_to_db(meal_name: str, grocery_items: str, able_to_make_more_for_lun
         cuisine (str): The type of cuisine.
         db_name (str): The name of the SQLite database file.
     """
+    initialize_database(db_name)  # Ensure the database and table are initialized
+
     with sqlite3.connect(db_name) as conn:
         cursor = conn.cursor()
-        cursor.execute('''
-            CREATE TABLE IF NOT EXISTS meals (
-                id INTEGER PRIMARY KEY,
-                meal_name TEXT NOT NULL,
-                grocery_items TEXT,
-                able_to_make_more_for_lunch BOOLEAN,
-                cuisine TEXT
-            )
-        ''')
         cursor.execute('''
             INSERT INTO meals (meal_name, grocery_items, able_to_make_more_for_lunch, cuisine)
             VALUES (?, ?, ?, ?)
