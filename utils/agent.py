@@ -1,15 +1,17 @@
 import os
 from typing import Any
 
-from smolagents import InferenceClientModel, CodeAgent, DuckDuckGoSearchTool, MCPClient, TransformersModel
+from smolagents import InferenceClientModel, CodeAgent, DuckDuckGoSearchTool, MCPClient, TransformersModel, OpenAIServerModel
 from mcp import StdioServerParameters
 
-SERVE_WITH_HF = os.getenv("MEALPLAN_SERVE_WITH_HF") # Set to True if you want to use HF Infra to Serve the model
+
+MEALPLAN_MODEL_TYPE = os.getenv("MEALPLAN_MODEL_TYPE") or "TransformersModel"
+MODEL_ID = os.getenv("MODEL_ID") or "Qwen/Qwen3-30B-A3B-Instruct-2507"
 
 MCP_SERVER_PARAMETERS = StdioServerParameters(
     command="uv",
     args=["run", "--with", "mcp", "mcp", "run", "./utils/mcp_server.py"],
-    env={"UV_PYTHON": "3.12", **os.environ},
+    env={**os.environ},
     transport="streamable-http",
 )
 
@@ -39,16 +41,25 @@ def initialize_agent(mcp_client: MCPClient) -> Any:
     tools.append(DuckDuckGoSearchTool())
     print (f"Available tools: {[tool.name for tool in tools]}")
 
-    model_id = "Qwen/Qwen3-30B-A3B-Instruct-2507"
+    model_id = MODEL_ID
 
-    if ( (SERVE_WITH_HF is not None) and SERVE_WITH_HF.lower() == "true"):
+    if MEALPLAN_MODEL_TYPE == "InferenceClientModel":
         model = InferenceClientModel(model_id=model_id, token=os.getenv("HUGGINGFACE_API_TOKEN"))
-    else:
+    elif MEALPLAN_MODEL_TYPE == "TransformersModel":
         model = TransformersModel(
             model_id=model_id,
             device_map="cpu",
             max_new_tokens=10000,
         )
+    elif MEALPLAN_MODEL_TYPE == "OpenAIServerModel":
+        model = OpenAIServerModel(
+            model_id=model_id,
+            api_base=os.getenv("OPENAI_BASE_URL"),
+            api_key=os.getenv("OPENAI_API_KEY"),
+        )
+    else:
+        raise NotImplementedError(f"Unrecognized model type: {MEALPLAN_MODEL_TYPE}")
+
 
     prompt_templates = get_prompt_template()
 

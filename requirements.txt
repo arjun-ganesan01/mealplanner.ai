@@ -1,6 +1,7 @@
 transformers
 mcp[cli]
 smolagents[mcp]
+smolagents[openai]
 accelerate # To use smolagents TransformersModel
 ddgs
 gradio
