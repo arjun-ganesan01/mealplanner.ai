@@ -9,4 +9,5 @@ pyproject.toml
 uv.lock
 node_modules/
 package*
-*db
+*.db
+*.env
