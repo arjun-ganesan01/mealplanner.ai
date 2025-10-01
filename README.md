@@ -65,8 +65,8 @@ python app.py
 
 - A [Dev Container](https://containers.dev/) definition for the app is [available](.devcontainer/devcontainer.json) for use.
 - Follow
-  [https://code.visualstudio.com/docs/devcontainers/containers#_installation] or
-  [https://devpod.sh/docs/getting-started/install] to install a dev container
+  https://code.visualstudio.com/docs/devcontainers/containers#_installation or
+  https://devpod.sh/docs/getting-started/install to install a dev container
   implementation
 - Make sure docker or podman is configured on the host.
 - For devpod, run `devpod up .` to start and `devpod ssh .` to enter the container.
