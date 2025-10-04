@@ -1,0 +1,25 @@
+{
+  // https://code.visualstudio.com/docs/devcontainers/containers
+  // https://containers.dev/overview
+  "name": "Mealplanner.ai",
+  "image": "mcr.microsoft.com/devcontainers/python:3.13",
+  // Exposes the app port to local network.
+  "appPort": [ "7860:7860" ],
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers-extra/features/uv:1": {}
+  },
+  "customizations": {
+    "settings": {
+      "python.defaultInterpreterPath": "${containerWorkspaceFolder}/.venv/bin/python",
+      "python.terminal.activateEnvInCurrentTerminal": true
+    }
+  },
+  "postCreateCommand": "uv venv && uv pip install -r requirements.txt",
+  "postAttachCommand": ". .venv/bin/activate",
+  // For SELinux enabled Hosts.
+  // https://devpod.sh/docs/troubleshooting/linux-troubleshooting#using-selinux
+  "runArgs": [
+      "--volume=${localWorkspaceFolder}:/workspaces/${localWorkspaceFolderBasename}:Z"
+  ]
+}

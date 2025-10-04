@@ -59,6 +59,22 @@ to your local machine and runs inference using your local hardware.
 python app.py
 ```
 
+<details>
+
+<summary>Running the app in a development container</summary>
+
+- A [Dev Container](https://containers.dev/) definition for the app is [available](.devcontainer/devcontainer.json) for use.
+- Follow
+  https://code.visualstudio.com/docs/devcontainers/containers#_installation or
+  https://devpod.sh/docs/getting-started/install to install a dev container
+  implementation
+- Make sure docker or podman is configured on the host.
+- For devpod, run `devpod up .` to start and `devpod ssh .` to enter the container.
+- By default, uv and pip dependencies will be automatically installed.
+- To start application, run `uv run ./app.py` inside the container.
+
+</details>
+
 Open http://127.0.0.1:7860/ on your favorite browser to launch the Gradio interface.
 
 The Gradio interface will have three tabs:
